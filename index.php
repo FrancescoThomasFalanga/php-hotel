@@ -40,6 +40,8 @@
 
     ];
 
+    $parking = $_GET["parking"] ?? false;
+
 ?>
 
 
@@ -61,11 +63,27 @@
 
     <div class="container text-center">
 
+        <form action="index.php" method="GET" class="container d-flex justify-content-center align-items-center mt-4">
+
+            <strong class="pe-3">Filtra per parcheggio</strong>
+            <select name="parking" class="form-select" style="width: 200px">
+                <option value="true">SI</option>
+                <option value="false">NO</option>
+            </select>
+
+            <input type="submit">
+
+        </form>
+
+
+
         <div class="row row-cols-2">
 
         <?php 
         
         foreach($hotels as $hotel) {
+
+            if ($parking == true && $hotel["parking"] == true) {
 
         ?>
 
@@ -85,6 +103,27 @@
 
         <?php
 
+            } else if($parking == false) {
+
+        ?>
+
+            <div class="col p-5">
+
+            <?php 
+
+            foreach($hotel as $chiave => $info) {
+
+                echo "{$chiave}: <strong>{$info}</strong> <br>";
+
+            };
+
+            ?>
+
+            </div>
+
+        <?php
+
+            };
         };
         
         ?>
