@@ -41,6 +41,7 @@
     ];
 
     $parking = $_GET["parking"] ?? "";
+    $vote = $_GET["vote"] ?? "";
 
 ?>
 
@@ -67,12 +68,13 @@
 
             <strong class="pe-2">Filtra per Parcheggio</strong>
             <select name="parking" class="form-select" style="width: 200px">
+                <option value="nop">Nessun Filtro Applicato</option>
                 <option value="true">SI</option>
                 <option value="false">NO</option>
             </select>
 
             <strong class="pe-2 ps-4">Filtra per Punteggio</strong>
-            <input type="number" class="form-control" placeholder="Numero tra 1 e 5" style="width: 200px">
+            <input name="vote" type="number" class="form-control" placeholder="Numero tra 1 e 5" style="width: 200px">
 
             <input type="submit">
 
@@ -86,25 +88,25 @@
         
         foreach($hotels as $hotel) {
 
-            if ($parking == "true" && $hotel["parking"] == true) {
+            if (($parking == "true" && $hotel["parking"] == true) || $parking == "nop") {
 
+
+                if ($hotel["vote"] >= $vote) {
         ?>
-
-            <div class="col p-5">
-
-            <?php 
-            
-            foreach($hotel as $chiave => $info) {
-            
-                echo "{$chiave}: <strong>{$info}</strong> <br>";
-            
-            };
-            
-            ?>
-
-            </div>
-
+        
+                    <div class="col p-5">
+        
+                    <?php 
+                        foreach($hotel as $chiave => $info) {
+                            echo "{$chiave}: <strong>{$info}</strong> <br>";
+                        };
+                    ?>
+        
+                    </div>
+        
         <?php
+                };
+
 
             } else if($parking == "false") {
 
