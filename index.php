@@ -40,7 +40,7 @@
 
     ];
 
-    $parking = $_GET["parking"] ?? false;
+    $parking = $_GET["parking"] ?? "";
 
 ?>
 
@@ -65,11 +65,14 @@
 
         <form action="index.php" method="GET" class="container d-flex justify-content-center align-items-center mt-4">
 
-            <strong class="pe-3">Filtra per parcheggio</strong>
+            <strong class="pe-2">Filtra per Parcheggio</strong>
             <select name="parking" class="form-select" style="width: 200px">
                 <option value="true">SI</option>
                 <option value="false">NO</option>
             </select>
+
+            <strong class="pe-2 ps-4">Filtra per Punteggio</strong>
+            <input type="number" class="form-control" placeholder="Numero tra 1 e 5" style="width: 200px">
 
             <input type="submit">
 
@@ -83,7 +86,7 @@
         
         foreach($hotels as $hotel) {
 
-            if ($parking == true && $hotel["parking"] == true) {
+            if ($parking == "true" && $hotel["parking"] == true) {
 
         ?>
 
@@ -103,7 +106,7 @@
 
         <?php
 
-            } else if($parking == false) {
+            } else if($parking == "false") {
 
         ?>
 
