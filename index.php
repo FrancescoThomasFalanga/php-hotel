@@ -57,7 +57,41 @@
 </head>
 <body>
 
-    <h1>PHP - Hotel</h1>
+    <h1 class="text-center mt-4">PHP - Hotel</h1>
+
+    <div class="container text-center">
+
+        <div class="row row-cols-2">
+
+        <?php 
+        
+        foreach($hotels as $hotel) {
+
+        ?>
+
+            <div class="col p-5">
+
+            <?php 
+            
+            foreach($hotel as $chiave => $info) {
+            
+                echo "{$chiave}: <strong>{$info}</strong> <br>";
+            
+            };
+            
+            ?>
+
+            </div>
+
+        <?php
+
+        };
+        
+        ?>
+
+        </div>
+
+    </div>
 
 
 
