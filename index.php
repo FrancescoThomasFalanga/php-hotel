@@ -68,7 +68,7 @@
 
             <strong class="pe-2">Filtra per Parcheggio</strong>
             <select name="parking" class="form-select" style="width: 200px">
-                <option value="nop">Nessun Filtro Applicato</option>
+                <option value="nop">Nessun Filtro</option>
                 <option value="true">SI</option>
                 <option value="false">NO</option>
             </select>
@@ -81,59 +81,88 @@
         </form>
 
 
+        <table class="table mt-5">
 
-        <div class="row row-cols-2">
+            <thead>
+                <tr>
 
-        <?php 
-        
-        foreach($hotels as $hotel) {
+                <?php 
+                
+                foreach($hotels[0] as $chiave => $valore) {
 
-            if (($parking == "true" && $hotel["parking"] == true) || $parking == "nop") {
-
-
-                if ($hotel["vote"] >= $vote) {
-        ?>
-        
-                    <div class="col p-5">
-        
-                    <?php 
-                        foreach($hotel as $chiave => $info) {
-                            echo "{$chiave}: <strong>{$info}</strong> <br>";
-                        };
                     ?>
-        
-                    </div>
-        
-        <?php
+
+                    <th scope="col"> <?php echo $chiave ?> </th>
+
+                    <?php
+
                 };
+                
+                ?>
 
+                </tr>
 
-            } else if($parking == "false") {
+            </thead>
 
-        ?>
-
-            <div class="col p-5">
+            <tbody>
 
             <?php 
+            
+            foreach($hotels as $hotel) {
 
-            foreach($hotel as $chiave => $info) {
+                if (($parking == "true" && $hotel["parking"] == true) || $parking == "nop" || $parking == null) {
 
-                echo "{$chiave}: <strong>{$info}</strong> <br>";
+                    if ($hotel["vote"] >= $vote) {
+            ?>
+            
+                        <tr>
+            
+                        <?php 
+                            foreach($hotel as $chiave => $info) {
 
-            };
+                                echo "<td>{$info}</td>";
+
+                            };
+                        ?>
+            
+                        </tr>
+            
+            <?php
+                    };
+
+
+                } else if($parking == "false") {
 
             ?>
 
-            </div>
+                <tr>
 
-        <?php
+                <?php 
 
+                foreach($hotel as $chiave => $info) {
+
+                    echo "<td>{$info}</td>";
+
+                };
+
+                ?>
+
+            </tr>
+
+            <?php
+
+                };
             };
-        };
-        
-        ?>
+            
+            ?>
 
-        </div>
+            </tbody>
+
+
+
+        </table>
+
+
 
     </div>
 
